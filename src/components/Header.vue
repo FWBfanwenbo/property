@@ -27,13 +27,16 @@
 
 <style rel="stylesheet/stylus" lang="stylus" scoped>
     .header
+        position: fixed
+        left: 0
+        top: 0
+        z-index: 1000
         width: 100%
         height: 64px
         background: -webkit-linear-gradient(#97673F, #B99373);
         background: -o-linear-gradient(#97673F, #B99373);
         background: -moz-linear-gradient(#97673F, #B99373);
         background: linear-gradient(#97673F, #B99373);
-        position: relative
         .info
             width: 100%;
             height: 24px

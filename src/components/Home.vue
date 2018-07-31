@@ -33,19 +33,27 @@
           </a>
         </li>
       </ul>
-       <span class="hot-text"></span>
     </div>
+    <AppMiddle></AppMiddle>
+    <AppNewsBox></AppNewsBox>
+    <AppFooter></AppFooter>
   </div>
 </template>
 
 <script>
   import AppHeader from "@/components/Header"
   import AppSlider from "@/components/base/Slider"
+  import AppMiddle from "@/components/middle/Middle"
+  import AppNewsBox from "@/components/base/NewsBox"
+  import AppFooter from "@/components/footer/Footer"
 export default {
   name: 'Home',
   components:{
       AppHeader,
-      AppSlider
+      AppSlider,
+      AppMiddle,
+      AppNewsBox,
+      AppFooter
   },
   data () {
     return {
@@ -93,6 +101,7 @@ export default {
   .home
     width: 100%
     .slider-wrapper
+      margin-top: 64px
       position: relative
       width: 100%
       overflow: hidden
