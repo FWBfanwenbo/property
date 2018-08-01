@@ -1,0 +1,285 @@
+<template>
+    <transition name="slide">
+        <div class="pay">
+            <App-Header :appName="nameTitle" :recode="recode"></App-Header>
+            <div class="list">
+                <span class="photo">
+                    <img :src="posiInfo.photoImg" alt="" width="50" height="50">
+                </span>
+                <div class="person">
+                    <div class="info">
+                        <span class="name">{{posiInfo.name}}</span>
+                        <span class="type">
+                            <img :src="posiInfo.typeImg" alt="" width="24" height="13">
+                        </span>
+                    </div>
+                    <div class="posi-info">
+                        <span class="posi">
+                            <img :src="posiInfo.posiImg" alt="" width="15" height="18">
+                        </span>
+                        <span class="posi-text">{{posiInfo.posiText}}</span>
+                    </div>
+                </div>
+            </div>
+            <AppSplit></AppSplit>
+            <div class="recode-list">
+                <ul class="recodes">
+                    <li class="list-d" v-for="item in recodes">
+                        <div class="lists">
+                            <div class="recodes">
+                                <span class="select"
+                                      :class="{active:currentId===item.id}"
+                                      @click="onSelect(item.id)"
+                                >
+                                     <span class="circle" v-show="currentId===item.id"></span>
+                                </span>
+                                <span class="icon">
+                                    <img :src="item.moneyImg" alt="" width="40" height="40">
+                                </span>
+                                <div class="main">
+                                    <span class="num">{{item.num}}</span>
+                                    <span class="expect">{{item.expect}}</span>
+                                </div>
+                            </div>
+                            <span class="go-to iconfont icon-qianjin" @click="selectItem(item.id)"></span>
+                        </div>
+                        <AppSplit></AppSplit>
+                    </li>
+                </ul>
+            </div>
+            <div class="rest"></div>
+            <footer class="footer">
+                <div style="width: 14%;" class="box">
+                   <span class="select" :class="">
+                     <span class="circle"></span>
+                </span><span class="tyexty">全选</span>
+                </div>
+                <div class="tatol">合计: <span class="sum">{{sum}}</span></div>
+                <div class="goto-pay">去支付</div>
+            </footer>
+            <router-view></router-view>
+        </div>
+    </transition>
+</template>
+
+<script>
+    import AppHeader from "@/components/base/Recode-Header"
+    import AppSplit from "@/components/base/Split"
+    export default {
+        name: "Pay",
+        components:{
+            AppHeader,
+            AppSplit
+        },
+        data(){
+            return {
+                nameTitle:"物业缴费",
+                recode:"缴费记录",
+                posiInfo:{
+                    photoImg:require("img/photo.png"),
+                    name:"张山峰",
+                    typeImg:require("img/type.png"),
+                    posiImg:require("../../assets/img/posi.png"),
+                    posiText:"富阳富春一号院-鹭影苑-1幢-301室"
+                },
+                recodes:[{
+                    id:1,
+                    moneyImg:require("img/money.png"),
+                    num:"215.00",
+                    expect:"2017年6月份代缴物业费",
+                },{
+                    id:2,
+                    moneyImg:require("img/money.png"),
+                    num:"215.00",
+                    expect:"2017年6月份代缴物业费",
+                }],
+                currentId:1,
+                sum:"255.00"
+            }
+        },
+        methods:{
+            onSelect(id){
+                this.currentId=id;
+            },
+            selectItem(id){
+                this.$router.push({
+                    path:`/home/pay/${id}`
+                })
+            }
+        }
+    }
+</script>
+
+<style scoped lang="stylus" rel="stylesheet/stylus">
+    .pay
+        position:fixed
+        left: 0
+        top: 0
+        bottom: 0
+        width: 100%
+        height: 100%
+        z-index:1000
+        background: #fff
+        &.slide-enter-active,&.slide-leave-active
+            transition: all 0.5s
+        &.slide-enter, &.slide-leave-to
+            transform: translate3d(100%, 0, 0)
+        .list
+            margin-top: 64px
+            width: 100%
+            height: 80px
+            padding: 6px 12px
+            display: flex
+            justify-content:space-between;
+            align-items: center
+            .photo
+                width: 50px
+                height: 50px
+            .person
+               width: 84%
+               .info
+                  width: 23%
+                  height: 25px
+                  display: flex
+                  justify-content:space-between;
+                  align-items: center
+                  .name
+                    width: 83%
+                    font-size: 14px
+                  .type
+                    width: 24px
+               .posi-info
+                  width: 90%
+                  display: flex
+                  justify-content:space-between;
+                  align-items: center
+                  .posi
+                    width: 15px
+                    height: 18px
+                  .posi-text
+                    width: 91%
+                    font-size: 14px
+
+
+        .recode-list
+           width: 100%
+           height: 80px
+           .recodes
+              .lists
+                 width: 100%
+                 height: 80px
+                 box-sizing: border-box
+                 display: flex
+                 justify-content:space-between
+                 align-items: center
+                 .recodes
+                   width: 60%
+                   display: flex
+                   justify-content:space-around
+                   align-items: center
+                   .select
+                      display: block
+                      width: 12px
+                      height: 12px
+                      border-radius:50%;
+                      border:1px solid red;
+                      padding: 2px
+                      position: relative
+                      .circle
+                          display: block
+                          width: 10px
+                          height: 10px
+                          border-radius:50%;
+                          border:1px solid red;
+                          background: red
+                          position: absolute
+                          left: 50%
+                          top: 50%
+                          transform: translate(-50%,-50%)
+                  .actives
+                     border:1px solid #B05161;
+                  .icon
+                      display: block
+                      width: 40px
+                      height: 40px
+                  .main
+                      width: 50%
+                      .num
+                          display: block
+                          width: 50%
+                          height: 17px
+                          font-size: 14px
+                          color: #FF243B
+                      .expect
+                          display: block
+                          width:140%
+                          height: 17px
+                          font-size: 14px
+                          color: #000
+                  .go-to
+                      width: 24px
+                      height: 24px
+                      font-size: 18px
+                      color: #B7B7B7
+        .rest
+            width: 100%
+            height: 323px
+            background: #FBF9FB
+            position: absolute
+            bottom: 0
+            left: 0
+        .footer
+            width: 100%
+            height: 50px
+            z-index :3000;
+            background: #fff;
+            padding: 0 12px;
+            border-bottom:1px solid #E1E0E3;
+            position: fixed
+            left: 0
+            bottom: 0
+            display: flex
+            justify-content: space-between
+            box-sizing: border-box
+            align-items: center
+            .box
+               display: flex
+               justify-content:space-between
+               align-items: center
+               .select
+                   display: block
+                   width: 12px
+                   height: 12px
+                   border-radius:50%;
+                   border:1px solid red;
+                   padding: 2px
+                   position: relative
+                   .circle
+                       display: block
+                       width: 10px
+                       height: 10px
+                       border-radius:50%;
+                       border:1px solid red;
+                       background: red
+                       position: absolute
+                       left: 50%
+                       top: 50%
+                       transform: translate(-50%,-50%)
+               .actives
+                   border:1px solid #B05161;
+            .tatol
+                width: 30%
+                font-size: 14px
+                .sum
+                    color: red
+                    font-size: 14px
+            .goto-pay
+                width: 82px
+                height: 30px
+                background: #6466A2;
+                font-size: 14px
+                color: #fff
+                text-align: center
+                line-height: 30px;
+                border-radius:3px;
+</style>

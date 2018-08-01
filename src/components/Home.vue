@@ -14,7 +14,7 @@
   </div>
     <div class="nav-lists">
       <ul class="navs">
-        <li class="nav-list" v-for="item in navList">
+        <li @click="onHandler(item.toKey)" class="nav-list" v-for="item in navList">
           <span class="nav-img">
             <img :src="item.imgUrl" alt="" height="56">
           </span>
@@ -37,6 +37,7 @@
     <AppMiddle></AppMiddle>
     <AppNewsBox></AppNewsBox>
     <AppFooter></AppFooter>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -75,23 +76,35 @@ export default {
         }],
         navList:[{
             imgUrl:require("img/repair.png"),
-            text:"报事报修"
+            text:"报事报修",
+            toKey:"repair"
         },{
             imgUrl:require("img/pay.png"),
-            text:"物业缴费"
+            text:"物业缴费",
+            toKey:"pay"
         },{
             imgUrl:require("img/trading-Area.png"),
-            text:"园区商圈"
+            text:"园区商圈",
+            toKey:"tradingarea"
         },{
             imgUrl:require("img/visitor.png"),
-            text:"访客通行"
+            text:"访客通行",
+            toKey:"visitor"
         },
         {
             imgUrl:require("img/visitor.png"),
-            text:"访客通行"
+            text:"访客通行",
+            toKey:"visitor"
          }],
         hotImg:require("img/hot.png")
     }
+  },
+  methods:{
+      onHandler(toKey){
+          this.$router.push({
+              path: `/home/${toKey}`
+          })
+     }
   }
 }
 </script>
@@ -100,6 +113,7 @@ export default {
   @import "~css/var.styl"
   .home
     width: 100%
+    height: 100%
     .slider-wrapper
       margin-top: 64px
       position: relative
