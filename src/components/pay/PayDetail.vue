@@ -95,7 +95,7 @@
                         iconImg:require("img/WeChat.png"),
                         payText:"微信支付"
                     }],
-                currentId:1,
+                currentId:0,
                 sum:"255.00"
             }
         },

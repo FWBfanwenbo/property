@@ -28,16 +28,16 @@
                         <div class="lists">
                             <div class="recodes">
                                 <span class="select"
-                                      :class="{active:currentId===item.id}"
-                                      @click="onSelect(item.id)"
+                                      :class="{active:item.check}"
+                                      @click="onSelect(item)"
                                 >
-                                     <span class="circle" v-show="currentId===item.id"></span>
+                                     <span class="circle" v-show="item.check"></span>
                                 </span>
                                 <span class="icon">
                                     <img :src="item.moneyImg" alt="" width="40" height="40">
                                 </span>
                                 <div class="main">
-                                    <span class="num">{{item.num}}</span>
+                                    <span class="num">{{item.num.toFixed(2)}}</span>
                                     <span class="expect">{{item.expect}}</span>
                                 </div>
                             </div>
@@ -49,9 +49,9 @@
             </div>
             <div class="rest"></div>
             <footer class="footer">
-                <div style="width: 14%;" class="box">
+                <div style="width: 14%;" class="box" @click="allSelect">
                    <span class="select" :class="">
-                     <span class="circle"></span>
+                     <span class="circle" v-show="status"></span>
                 </span><span class="tyexty">全选</span>
                 </div>
                 <div class="tatol">合计: <span class="sum">{{sum}}</span></div>
@@ -85,26 +85,47 @@
                 recodes:[{
                     id:1,
                     moneyImg:require("img/money.png"),
-                    num:"215.00",
+                    num:255,
                     expect:"2017年6月份代缴物业费",
+                    check:false
                 },{
                     id:2,
                     moneyImg:require("img/money.png"),
-                    num:"215.00",
+                    num:255,
                     expect:"2017年6月份代缴物业费",
+                    check:false
                 }],
-                currentId:1,
-                sum:"255.00"
+                status:false,
+                pay:[],
+            }
+        },
+        computed:{
+            sum(){
+                var that=this;
+                var sums=0;
+                this.recodes.forEach(function (item) {
+                    if(item.check){
+                        sums+=item.num
+                    }
+                })
+                return sums.toFixed(2)
             }
         },
         methods:{
-            onSelect(id){
-                this.currentId=id;
+            onSelect(obj){
+                obj.check=!obj.check;
             },
             selectItem(id){
                 this.$router.push({
                     path:`/home/pay/${id}`
                 })
+            },
+            allSelect(){
+                var that=this;
+                this.recodes.forEach(function (item) {
+                    item.check=true;
+                })
+                this.status=true;
             }
         }
     }

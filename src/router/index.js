@@ -10,6 +10,21 @@ import Pay from "@/components/pay/Pay"
 import TradingArea from "@/components/trading-area/TradingArea"
 import Visitor from '@/components/visitor/Visitor'
 import PayDetail from "@/components/pay/PayDetail"
+import Recommend from "@/components/trading-area/Recommend"
+import Discount from "@/components/trading-area/Discount"
+import Trading from "@/components/trading-area/Trading"
+import Service from "@/components/trading-area/Service"
+import Praise from "@/components/middle/Praise"
+import Activity from "@/components/middle/Activity"
+import Progress from "@/components/middle/activity/Progress"
+import AlreadyEnd from "@/components/middle/activity/AlreadyEnd"
+import ParticipateIn from "@/components/middle/activity/ParticipateIn"
+import Share from '@/components/neighborhood/Share'
+import ActiveCenter from '@/components/neighborhood/ActiveCenter'
+import Business from '@/components/neighborhood/Business'
+import Healthy from '@/components/neighborhood/Healthy'
+import Teaching from '@/components/neighborhood/Teaching'
+import DynamicDetail from "@/components/base/DynamicDetail"
 
 Vue.use(Router)
 
@@ -31,10 +46,39 @@ export default new Router({
           }]
       },{
           path:'tradingarea',
-          component:TradingArea
+          component:TradingArea,
+          children:[{
+              path:"recommend",
+              component:Recommend
+          },{
+              path:"discount",
+              component:Discount
+          },{
+              path:"trading",
+              component:Trading
+          },{
+              path:"service",
+              component:Service
+          }]
       },{
           path:'visitor',
           component:Visitor
+      },{
+          path:'praise',
+          component:Praise
+      },{
+          path:'activity',
+          component:Activity,
+          children:[{
+              path:'progress',
+              component:Progress
+          },{
+              path:'alreadyEnd',
+              component:AlreadyEnd
+          },{
+              path:'participateIn',
+              component:ParticipateIn
+          }]
       }]
     },
       {
@@ -47,7 +91,31 @@ export default new Router({
       },
       {
           path:"/neighborhood",
-          component: Neighborhood
+          component: Neighborhood,
+          children:[{
+              path:"share",
+              component: Share,
+              children:[{
+                  path:':id',
+                  component:DynamicDetail
+              }]
+          },
+          {
+              path:"activeCenter",
+              component: ActiveCenter
+          },
+          {
+              path:"business",
+              component: Business
+          },
+          {
+              path:"healthy",
+              component: Healthy
+          },
+          {
+              path:"teaching",
+              component: Teaching
+          }]
       },
       {
           path:"/myMessage",

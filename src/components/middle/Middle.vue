@@ -1,14 +1,14 @@
 <template>
     <div class="middle">
         <div class="top">
-            <div class="left">
+            <div class="left" @click="onPraise">
                 <span class="text">{{praise.text}}</span>
                 <span class="img">
                      <img :src="praise.imgUrl" alt="" width="72" height="52">
                 </span>
             </div>
             <div class="zhong">
-                <div class="top">
+                <div class="top" @click="onActivity">
                     <span class="text">{{activity.text}}</span>
                     <span class="img">
                         <img :src="activity.imgUrl" alt="" width="83" height="51">
@@ -56,6 +56,18 @@
                     text:"园区公告"
                 },
                 participate:require("img/participate.png")
+            }
+        },
+        methods:{
+            onPraise(){
+                this.$router.push({
+                    path:"/home/praise"
+                })
+            },
+            onActivity(){
+                this.$router.push({
+                    path:"/home/activity"
+                })
             }
         }
     }
