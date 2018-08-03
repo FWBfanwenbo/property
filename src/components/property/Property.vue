@@ -37,7 +37,31 @@
                 </li>
             </ul>
         </div>
-        <AppSplit></AppSplit>
+         <div class="page-column">
+             <ul class="box">
+                 <router-link tag="li" to="/property/vote" class="box-list">
+                     <span class="box-text">园区服务</span>
+                     <span class="box-icon">
+                         <img :src="img1" alt="" width="88" height="66">
+                     </span>
+                 </router-link>
+                 <router-link tag="li" to="/property/vote" class="box-list">
+                     <span class="box-text">物品放行</span>
+                     <span class="box-icon">
+                         <img :src="img2" alt="" width="88" height="66">
+                     </span>
+                 </router-link>
+                 <router-link tag="li" to="/property/vote" class="box-list">
+                     <span class="box-text">大众选票</span>
+                     <span class="box-icon">
+                         <img :src="img2" alt="" width="88" height="66">
+                     </span>
+                 </router-link>
+             </ul>
+         </div>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
         <AppFooter></AppFooter>
     </div>
 </template>
@@ -68,7 +92,10 @@
                     name:"黄珊",
                     type:"客服"
                 }],
-                toIcon:require("img/to.png")
+                toIcon:require("img/to.png"),
+                img1:require("img/box_02.png"),
+                img2:require("img/box_02.png"),
+                img3:require("img/box_03.png")
             }
         }
     }
@@ -127,6 +154,7 @@
                overflow: hidden
                height: 100%
                border-radius:3px
+               box-shadow:1px 4px 5px -1px rgba(0,0,0,0.1)
                &:last-child
                    width: 100px
                .img
@@ -166,6 +194,32 @@
      
                
 
-
+      .page-column
+          width: 100%
+          padding: 12px
+          background: #f5f5f5
+          box-sizing: border-box
+          .box
+             .box-list
+                 width: 100%
+                 height: 100px
+                 border-radius :5px
+                 box-shadow:-5px 0px -1px -3px rgba(0,0,0,0.1)
+                 background: #fff
+                 padding:0 30px
+                 box-sizing: border-box
+                 margin-bottom: 10px
+                 display: flex
+                 justify-content: space-between
+                 align-items: center
+                 .box-text
+                     width: 25%
+                     height: 30px
+                     font-size: 14px
+                     font-weight:600
+                     line-height: 30px
+                 .box-icon
+                     width: 88px
+                     height: 66px
 
 </style>

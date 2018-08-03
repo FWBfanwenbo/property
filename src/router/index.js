@@ -25,6 +25,11 @@ import Business from '@/components/neighborhood/Business'
 import Healthy from '@/components/neighborhood/Healthy'
 import Teaching from '@/components/neighborhood/Teaching'
 import DynamicDetail from "@/components/base/DynamicDetail"
+import Vote from "@/components/property/Vote"
+import VoteProgress from "@/components/property/vote/VoteProgress"
+import VoteEnd from "@/components/property/vote/VoteEnd"
+import VotePart from "@/components/property/vote/VotePart"
+import VoteDetail from "@/components/property/vote/VoteDetail"
 
 Vue.use(Router)
 
@@ -46,6 +51,7 @@ export default new Router({
           }]
       },{
           path:'tradingarea',
+          redirect:"/home/tradingarea/trading",
           component:TradingArea,
           children:[{
               path:"recommend",
@@ -68,6 +74,7 @@ export default new Router({
           component:Praise
       },{
           path:'activity',
+          redirect:"/home/activity/participateIn",
           component:Activity,
           children:[{
               path:'progress',
@@ -83,7 +90,26 @@ export default new Router({
     },
       {
         path:"/property",
-        component: Property
+        component: Property,
+        children:[{
+            path:"vote",
+            component: Vote,
+            redirect:"/property/vote/votePart",
+            children:[{
+                path:"voteProgress",
+                component: VoteProgress
+            },{
+                path:"voteEnd",
+                component: VoteEnd
+            },{
+                path:"votePart",
+                component: VotePart,
+                children:[{
+                    path:":id",
+                    component: VoteDetail
+                }]
+            }]
+        }]
       },
       {
           path:"/telephone",
@@ -91,6 +117,7 @@ export default new Router({
       },
       {
           path:"/neighborhood",
+          redirect:"/neighborhood/share",
           component: Neighborhood,
           children:[{
               path:"share",
@@ -121,5 +148,8 @@ export default new Router({
           path:"/myMessage",
           component: MyMessage
       }
-  ]
+  ],
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0 }
+    }
 })
