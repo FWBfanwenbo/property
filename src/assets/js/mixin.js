@@ -1,0 +1,188 @@
+export const playlistMixin={
+    data(){
+        return {
+            partList:[
+                {
+                    id:1,
+                    partImg:require("img/one.png"),
+                    title:"谁的的旅行摄影制霸朋友圈.漳社区投票活动",
+                    time:"2017-07-0-12至2017-06-15",
+                    status:"进行中",
+                    isEnd:false
+                },{
+                    id:2,
+                    partImg:require("img/two.png"),
+                    title:"谁的的旅行摄影制霸朋友圈.漳社区投票活动",
+                    time:"2017-07-0-12至2017-06-15",
+                    status:"已结束",
+                    isEnd:true
+                },{
+                    id:2,
+                    partImg:require("img/two.png"),
+                    title:"谁的的旅行摄影制霸朋友圈.漳社区投票活动",
+                    time:"2017-07-0-12至2017-06-15",
+                    status:"已结束",
+                    isEnd:true
+                }
+            ]
+        }
+    },
+    mounted(){
+        this.onHandlePlaylist(this.partList)
+    },
+    activated(){
+        this.onHandlePlaylist(this.partList)
+    },
+    partList:{
+        playlist(newVal){
+            this.onHandlePlaylist(newVal)
+        }
+    },
+    methods:{
+        onHandlePlaylist(){
+            throw new Error('Component must implement onHandlePlaylist method')
+        }
+    }
+};
+
+export const recommendListMixin={
+    data(){
+        return {
+            likelist:[
+                {
+                    id:1,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园"
+                },                    {
+                    id:2,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园"
+                },                    {
+                    id:3,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园"
+                },                    {
+                    id:4,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园"
+                },                    {
+                    id:5,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园"
+                },                    {
+                    id:6,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园"
+                },                    {
+                    id:7,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园"
+                },
+            ]
+        }
+    },
+    mounted(){
+        this.onHandlePlaylist(this.likelist)
+    },
+    activated(){
+        this.onHandlePlaylist(this.likelist)
+    },
+    watch:{
+        likelist(newVal){
+            this.onHandlePlaylist(newVal)
+        }
+    },
+    methods:{
+        onHandlePlaylist(){
+            throw new Error('Component must implement onHandlePlaylist method')
+        }
+    }
+};
+export const commentListMixin={
+    data(){
+        return {
+            commentList:[
+                {
+                    id:1,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园",
+                    commentNum:32,
+                    text:"老大地位受威胁，自然不择手段要遏制甚至摧毁威胁者了。借口有千万个，本质只有这一条",
+                    time:"2018-08-03"
+                },{
+                    id:2,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园",
+                    commentNum:32,
+                    text:"老大地位受威胁，自然不择手段要遏制甚至摧毁威胁者了。借口有千万个，本质只有这一条",
+                    time:"2018-08-03"
+                },{
+                    id:3,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园",
+                    commentNum:32,
+                    text:"老大地位受威胁，自然不择手段要遏制甚至摧毁威胁者了。借口有千万个，本质只有这一条",
+                    time:"2018-08-03"
+                },{
+                    id:4,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园",
+                    commentNum:32,
+                    text:"老大地位受威胁，自然不择手段要遏制甚至摧毁威胁者了。借口有千万个，本质只有这一条",
+                    time:"2018-08-03"
+                },{
+                    id:5,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园",
+                    commentNum:32,
+                    text:"老大地位受威胁，自然不择手段要遏制甚至摧毁威胁者了。借口有千万个，本质只有这一条",
+                    time:"2018-08-03"
+                },{
+                    id:6,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园",
+                    commentNum:32,
+                    text:"老大地位受威胁，自然不择手段要遏制甚至摧毁威胁者了。借口有千万个，本质只有这一条",
+                    time:"2018-08-03"
+                },{
+                    id:8,
+                    likeImg:require("img/img_02.png"),
+                    nick:"丐帮帮主",
+                    posi:"金昌诚园",
+                    commentNum:32,
+                    text:"老大地位受威胁，自然不择手段要遏制甚至摧毁威胁者了。借口有千万个，本质只有这一条",
+                    time:"2018-08-03"
+                }
+            ]
+        }
+    },
+    mounted(){
+        this.onHandlecommentList(this.commentList)
+    },
+    activated(){
+        this.onHandlecommentList(this.commentListt)
+    },
+    watch:{
+        commentList(newVal){
+            this.onHandlecommentList(newVal)
+        }
+    },
+    methods:{
+        onHandlecommentList(){
+            throw new Error('Component must implement onHandlePlaylist method')
+        }
+    }
+};

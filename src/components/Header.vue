@@ -5,10 +5,14 @@
                 <img :src="nav" alt="" width="24">
             </span>
             <span class="text">{{appName}}</span>
-            <span class="icon">
+            <span class="icon message" @click="gotoMeseeage">
                 <img :src="info" alt="" width="24">
+                <span class="info-num"><span class="iconfont icon icon-jiahao"></span>9</span>
             </span>
         </div>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 
@@ -20,6 +24,13 @@
                 appName:"金昌诚园",
                 nav:require("img/nav.gif"),
                 info:require("img/info.png")
+            }
+        },
+        methods:{
+            gotoMeseeage(){
+                this.$router.push({
+                    path:"/home/myInfo"
+                })
             }
         }
     }
@@ -57,4 +68,20 @@
             .text
                 font-size: 18px
                 color: #fff
+            .message
+                position: relative
+                .info-num
+                    width: 23px
+                    height: 15px
+                    border-radius :50%
+                    background: red
+                    font-size: 8px
+                    color: #fff;
+                    position: absolute
+                    right: -5px
+                    top: -5px
+                    .icon
+                        font-size: 8px
+                        color: #fff
+
 </style>

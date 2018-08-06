@@ -1,7 +1,12 @@
 <template>
     <transition name="slide">
       <div class="pay-detail">
-          <App-Header :appName="nameTitle"></App-Header>
+          <div class="app-header">
+              <div class="info">
+                  <span @click="back" class="icon iconfont icon-2fanhui"></span>
+                  <span class="text">{{appName}}</span>
+              </div>
+          </div>
           <div class="app-split">
               <App-Split></App-Split>
           </div>
@@ -47,8 +52,18 @@
           <div class="rest"></div>
           <footer class="footer">
               <div class="tatol">合计: <span class="sum">{{sum}}</span></div>
-              <div class="goto-pay">去支付</div>
+              <div class="goto-pay" @click="toPay">去支付</div>
           </footer>
+          <div class="pay-box" v-show="isPayShow">
+              <span class="pay-top">您需要支付人民币{{sum}}元</span>
+              <div class="pay-bottom">
+                  <span class="make-sure" @click="makePay">确定</span>
+                  <span class="cancel" @click="hide">取消</span>
+              </div>
+          </div>
+          <keep-alive>
+              <router-view></router-view>
+          </keep-alive>
       </div>
     </transition>
 </template>
@@ -64,7 +79,7 @@
         },
         data(){
             return {
-                nameTitle:"物业缴费",
+                appName:"物业缴费",
                 explain:{
                     img:require("img/exp.png"),
                     text:"2017年6月份代缴物业费"
@@ -96,12 +111,36 @@
                         payText:"微信支付"
                     }],
                 currentId:0,
-                sum:"255.00"
+                sum:"255.00",
+                isPayShow:false
             }
         },
         methods:{
             onSelect(id){
                 this.currentId=id;
+            },
+            back(){
+                this.$router.push({path:"/home/pay"})
+            },
+            toPay(){
+                if(!sessionStorage.loginInfo){
+                    this.$router.push({
+                        path:"/login"
+                    })
+                }
+                this.isPayShow=true
+            },
+            hide(){
+                this.isPayShow=false
+            },
+            makePay(){
+                this.toPay();
+                setTimeout(()=>{
+                    this.hide()
+                    this.$router.push({
+                        path:'/paySuccess'
+                    })
+                },100)
             }
         }
     }
@@ -121,6 +160,38 @@
         transition: all 0.5s
       &.slide-enter, &.slide-leave-to
         transform: translate3d(100%, 0, 0)
+    .app-header
+        position: fixed
+        left: 0
+        top: 0
+        z-index: 2000
+        width: 100%
+        height: 64px
+        .info
+            width: 100%;
+            height: 24px
+            box-sizing: border-box
+            padding: 0 16px
+            position: absolute
+            left: 0
+            bottom: 12px
+            .text
+                float: right
+                width: 90%
+                height: 24px
+                font-size: 18px
+                text-align: center
+                line-height: 24px
+                font-weight: 400
+            .icon
+                float: left
+                width: 24px
+                height: 24px
+                text-align: center
+                line-height: 24px
+                font-size: 18px
+                color: #1B1B1B
+                font-weight: 600
       .app-split
         margin-top: 64px
       .middle
@@ -276,4 +347,49 @@
                 text-align: center
                 line-height: 30px;
                 border-radius:3px;
+        .pay-box
+            width: 250px
+            height: 150px
+            z-index: 4000
+            background: #000
+            color: #fff
+            opacity :0.8
+            border-radius :10px;
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%,-50%)
+            padding: 20px
+            box-sizing: border-box
+            &.slide-enter-active,&.slide-leave-active
+                transition: all 0.5s
+                opacity :0
+            &.slide-enter, &.slide-leave-to
+                opacity :1
+            .pay-top
+                display: block
+                width: 100%
+                height: 50px
+                font-size: 14px
+                text-align: center
+                line-height: 50px
+                border-bottom:1px solid #7d7d7d;
+            .pay-bottom
+                margin-top: 20px
+                width: 100%
+                height: 50px
+            .make-sure
+                width: 50%
+                font-size: 14px
+                border-radius :5px
+                text-align: center
+                line-height: 50%
+                float: left
+            .cancel
+                width: 50%
+                font-size: 14px
+                border-radius :5px
+                text-align: center
+                line-height: 50%
+                float: left
 </style>

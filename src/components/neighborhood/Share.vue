@@ -19,7 +19,7 @@
         data(){
             return {
                 activityList:[{
-                    id:1,
+                    id:0,
                     photo:require("img/activity_01.png"),
                     nickname:"天山童姥",
                     position:"金昌诚园",
@@ -30,7 +30,7 @@
                     }],
                     status:"进行中"
                 },{
-                    id:2,
+                    id:1,
                     photo:require("img/activity_01.png"),
                     nickname:"天山童姥",
                     position:"金昌诚园",
@@ -46,7 +46,7 @@
                         }],
                     status:"已结束"
                 },{
-                    id:3,
+                    id:2,
                     photo:require("img/activity_01.png"),
                     nickname:"天山童姥",
                     position:"金昌诚园",

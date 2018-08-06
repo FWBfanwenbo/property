@@ -1,6 +1,7 @@
 <template>
     <div>
-        <section class="wrapper">
+        <section class="wrapper" ref="sectionWrapper">
+            <div class="right-triangle" :class="{'active-end':list.status==='已结束'}"><span class="span-text">{{list.status}}</span></div>
             <div class="top">
                 <div class="left">
                 <span class="photo">
@@ -64,17 +65,41 @@
                     path:`/neighborhood/share/${this.list.id}`
                 });
             }
+        },
+        mounted(){
         }
     }
 </script>
 
 <style rel="stylesheet/stylus" lang="stylus" scoped>
             .wrapper
+                position: relative
+                .right-triangle
+                    width: 0;
+                    height: 0;
+                    border-top: 50px solid #ff515b;
+                    border-right: 50px solid transparent;
+                    text-align: center
+                    position: absolute
+                    left: 0
+                    top: 0
+                   .span-text
+                      display: block
+                      width: 100px
+                      height: 30px
+                      text-align: center
+                      transform:rotate(-45deg)
+                      line-height: 30px
+                      color:#fff
+                      position: absolute
+                      left: -34px;
+                      top: -47px;
+                .active-end
+                    border-top: 50px solid #2e4080;
                 .top
                     padding: 6px 12px
                     box-sizing: border-box
                     height: 60px
-                    box-sizing: border-box
                     display: flex
                     justify-content: space-between
                     align-items: center

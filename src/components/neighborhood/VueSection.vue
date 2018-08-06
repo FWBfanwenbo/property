@@ -25,22 +25,6 @@
                 </li>
             </ul>
         </div>
-        <div class="bottom">
-            <ul class="mid">
-                <li class="like">
-                    <div class="like-box">
-                        <span class="icon iconfont icon-iconfontzhizuobiaozhun023148"></span>
-                        <span class="num">565</span>
-                    </div>
-                </li>
-                <li class="comment">
-                    <div class="comment-box">
-                        <span class="icon iconfont icon-pinglun"></span>
-                        <span class="num">32</span>
-                    </div>
-                </li>
-            </ul>
-        </div>
     </section>
 </template>
 
@@ -61,7 +45,6 @@
             padding: 6px 12px
             box-sizing: border-box
             height: 60px
-            box-sizing: border-box
             display: flex
             justify-content: space-between
             align-items: center
@@ -126,43 +109,4 @@
             .photo-list
                 width: 113px
                 height: 113px
-        .bottom
-            box-sizing: border-box
-            width: 100%
-            margin-top: 12px
-            height: 34px
-            border-top:1px solid #E8E8E8;
-            border-bottom:1px solid #E8E8E8;
-            .mid
-                display: flex
-                width: 40%
-                justify-content: space-between
-                align-items: center
-                box-sizing: border-box
-                .like
-                    width: 50%
-                    padding: 12px
-                    box-sizing: border-box
-                    .like-box
-                        width: 86%
-                        justify-content: space-between
-                        align-items: center
-                        box-sizing: border-box
-                        text-align: center
-                        .icon,.num
-                            width: 45%
-                            font-size: 14px
-                .comment
-                    width: 50%
-                    padding: 12px
-                    box-sizing: border-box
-                .comment-box
-                    width: 100%
-                    justify-content: space-between
-                    align-items: center
-                    box-sizing: border-box
-                    text-align: center
-                .icon,.num
-                    width: 45%
-                    font-size: 14px
 </style>

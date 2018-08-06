@@ -1,41 +1,45 @@
 <template>
   <div class="home">
     <App-Header></App-Header>
-    <div>
-      <div v-if="recommends.length" class="slider-wrapper">
-        <App-Slider>
-          <div v-for="item in recommends">
-            <a :href="item.linkUrl">
-              <img :src="item.picUrl" alt="" height="150">
-            </a>
+    <AppScroll style="height: 620px;overflow: hidden;">
+      <div>
+        <div>
+          <div v-if="recommends.length" class="slider-wrapper">
+            <App-Slider>
+              <div v-for="item in recommends">
+                <a :href="item.linkUrl">
+                  <img :src="item.picUrl" alt="" height="150">
+                </a>
+              </div>
+            </App-Slider>
           </div>
-        </App-Slider>
-      </div>
-  </div>
-    <div class="nav-lists">
-      <ul class="navs">
-        <li @click="onHandler(item.toKey)" class="nav-list" v-for="item in navList">
+        </div>
+        <div class="nav-lists">
+          <ul class="navs">
+            <li @click="onHandler(item.toKey)" class="nav-list" v-for="item in navList">
           <span class="nav-img">
             <img :src="item.imgUrl" alt="" height="56">
           </span>
-          <span class="nav-text">{{item.text}}</span>
-        </li>
-      </ul>
-    </div>
-    <div class="hot-news">
+              <span class="nav-text">{{item.text}}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="hot-news">
        <span class="icon-news">
          <img :src="hotImg" alt="" width="20" height="15">
        </span>
-      <ul class="hot-list">
-        <li class="list">
-          <a href="" class="list-a">
-            <p class="list-p">中国接连公布航天大项目 中国接连公布航天大项目 中国接连公布航天大项目</p>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <AppMiddle></AppMiddle>
-    <AppNewsBox></AppNewsBox>
+          <ul class="hot-list">
+            <li class="list">
+              <a href="" class="list-a">
+                <p class="list-p">中国接连公布航天大项目 中国接连公布航天大项目 中国接连公布航天大项目</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <AppMiddle></AppMiddle>
+        <AppNewsBox></AppNewsBox>
+      </div>
+    </AppScroll>
     <AppFooter></AppFooter>
     <router-view></router-view>
   </div>
@@ -47,6 +51,7 @@
   import AppMiddle from "@/components/middle/Middle"
   import AppNewsBox from "@/components/base/NewsBox"
   import AppFooter from "@/components/footer/Footer"
+  import AppScroll from "@/components/base/Scroll"
 export default {
   name: 'Home',
   components:{
@@ -54,7 +59,8 @@ export default {
       AppSlider,
       AppMiddle,
       AppNewsBox,
-      AppFooter
+      AppFooter,
+      AppScroll
   },
   data () {
     return {

@@ -10,22 +10,79 @@
             </div>
             <div class="view">
                 <AppVueSection :list="list"></AppVueSection>
+                <div class="bottom-mi">
+                    <ul class="mid">
+                        <li class="like" @click="showPraise">
+                            <div class="like-box">
+                                <span class="icon iconfont icon-iconfontzhizuobiaozhun023148"></span>
+                                <span class="num">565</span>
+                            </div>
+                            <span class="line" v-show="isLike"></span>
+                        </li>
+                        <li class="comment" @click="showComment">
+                            <div class="comment-box">
+                                <span class="icon iconfont icon-pinglun"></span>
+                                <span class="num">32</span>
+                            </div>
+                            <span class="line" v-show="isComment"></span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="like-wrapper">
-                <ul class="like-box">
-                    <li class="like-list" v-for="list in likelist">
+            <Show ref="showHide">
+                <div class="like-wrapper" ref="likeWrapper">
+                    <AppScroll ref="scroll"  style="height: 100%;overflow: hidden;">
+                        <div>
+                            <ul class="like-box">
+                                <li class="like-list" v-for="list in likelist">
                         <span class="like-photo">
                             <img :src="list.likeImg" alt="">
                         </span>
-                        <div class="like-info">
-                            <div class="like-mid">
-                                <span class="like-nickname">{{list.nick}}</span>
-                                <span class="like-posi">{{list.posi}}</span>
-                            </div>
+                                    <div class="like-info">
+                                        <div class="like-mid">
+                                            <span class="like-nickname">{{list.nick}}</span>
+                                            <span class="like-posi">{{list.posi}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </AppScroll>
+                </div>
+            </Show>
+            <Show ref="showCommemt">
+                <div class="comment-wrapper" ref="commentWrapper">
+                    <AppScroll ref="commentScroll" style="height: 100%;overflow: hidden;">
+                        <div>
+                            <ul class="comment-box" v-for="list in commentList">
+                                <li class="comment-tr">
+                                    <span class="author-photo">
+                                        <img :src="list.likeImg" alt="">
+                                    </span>
+                                    <div class="tr-column">
+                                        <div class="author-column">
+                                            <div class="author-info">
+                                                <span class="author-nickname">{{list.nick}}</span>
+                                                <div class="position-info">
+                                                    <span class="posi">{{list.posi}}</span>
+                                                    <span class="time">{{list.time}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="author-right">
+                                                <span class="praise-icon iconfont icon-iconfontzhizuobiaozhun023148"></span>
+                                                <span class="comment-num">{{list.commentNum}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="comment-content">
+                                            <p class="text">{{list.text}}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </AppScroll>
+                </div>
+            </Show>
             <div class="bottom">
                 <ul class="mid-posi">
                     <li class="like">
@@ -48,10 +105,16 @@
 
 <script>
     import AppVueSection from "@/components/neighborhood/VueSection"
+    import Show from "@/components/neighborhood/DPraise"
+    import AppScroll from "@/components/base/Scroll"
+    import {recommendListMixin,commentListMixin} from 'js/mixin'
     export default {
         name: "DynamicDetail",
+        mixins:[recommendListMixin,commentListMixin],
         components:{
-            AppVueSection
+            AppVueSection,
+            AppScroll,
+            Show
         },
         data(){
             return {
@@ -67,50 +130,46 @@
                     }],
                     status:"进行中"
                 },
-                likelist:[
-                    {
-                        id:1,
-                        likeImg:require("img/alipay.png"),
-                        nick:"丐帮帮主",
-                        posi:"金昌诚园"
-                    },                    {
-                        id:2,
-                        likeImg:require("img/alipay.png"),
-                        nick:"丐帮帮主",
-                        posi:"金昌诚园"
-                    },                    {
-                        id:3,
-                        likeImg:require("img/alipay.png"),
-                        nick:"丐帮帮主",
-                        posi:"金昌诚园"
-                    },                    {
-                        id:4,
-                        likeImg:require("img/alipay.png"),
-                        nick:"丐帮帮主",
-                        posi:"金昌诚园"
-                    },                    {
-                        id:5,
-                        likeImg:require("img/alipay.png"),
-                        nick:"丐帮帮主",
-                        posi:"金昌诚园"
-                    },                    {
-                        id:6,
-                        likeImg:require("img/alipay.png"),
-                        nick:"丐帮帮主",
-                        posi:"金昌诚园"
-                    },                    {
-                        id:7,
-                        likeImg:require("img/alipay.png"),
-                        nick:"丐帮帮主",
-                        posi:"金昌诚园"
-                    },
-                ]
+                isLike:false,
+                isComment:false
             }
         },
         methods:{
+            onHandlePlaylist(likelist){
+                const bottom=likelist.length>0?'60px':'';
+                this.$refs.likeWrapper.style.bottom=bottom;
+                this.$refs.scroll.refresh();
+            },
+            onHandlecommentList(commentList){
+                const bottom=commentList.length>0?'60px':'';
+                this.$refs.commentWrapper.style.bottom=bottom;
+                this.$refs.commentScroll.refresh();
+            },
             back(){
-                this.$router.push({path:"/neighborhood/share"})
+                this.$router.back()
+            },
+            showPraise(){
+                this.$refs.showHide.show();
+                this.$refs.showCommemt.hide()
+                setTimeout(()=>{
+                    this.$refs.scroll.refresh();
+                },100)
+                this.isLike=true;
+                this.isComment=false
+            },
+            showComment(){
+                this.$refs.showHide.hide();
+                this.$refs.showCommemt.show()
+                setTimeout(()=>{
+                    this.$refs.commentScroll.refresh();
+                })
+                this.isLike=false;
+                this.isComment=true
             }
+        },
+        mounted(){
+            this.$refs.showHide.show();
+            this.isLike=true;
         }
     }
 </script>
@@ -175,7 +234,72 @@
 
         .view
             margin-top: 64px
+            background: #fff
+            .bottom-mi
+                box-sizing: border-box
+                width: 100%
+                margin-top: 12px
+                z-index: 2000
+                height: 45px
+                border-top:1px solid #E8E8E8;
+                border-bottom:1px solid #E8E8E8;
+                .mid
+                    display: flex
+                    width: 60%
+                    justify-content: space-between
+                    align-items: center
+                    background: #fff
+                    box-sizing: border-box
+                    .like
+                        width: 50%
+                        padding: 12px
+                        box-sizing: border-box
+                        position: relative
+                        .like-box
+                            width: 86%
+                            justify-content: space-between
+                            align-items: center
+                            box-sizing: border-box
+                            text-align: center
+                            .icon,.num
+                                width: 45%
+                                font-size: 14px
+                        .line
+                            width: 40%
+                            height: 2px
+                            position: absolute
+                            left: 50%
+                            bottom: 12%
+                            background: red
+                            transform:translate(-50%,0)
+                    .comment
+                        width: 50%
+                        padding: 12px
+                        box-sizing: border-box
+                        position: relative
+                        .comment-box
+                            width: 100%
+                            justify-content: space-between
+                            align-items: center
+                            box-sizing: border-box
+                            text-align: center
+                            .icon,.num
+                                width: 45%
+                                font-size: 14px
+                        .line
+                            width: 40%
+                            height: 2px
+                            position: absolute
+                            left: 50%
+                            bottom: 12%
+                            background: red
+                            transform:translate(-50%,0)
         .like-wrapper
+            width: 100%
+            position: fixed
+            left: 0
+            top: 370px
+            height: 242px
            .like-box
               .like-list
                  width: 100%
@@ -212,10 +336,83 @@
                              display: block
                              width: 40%
                              height: 20px;
-                             line-height: 20px
-                             font-size: 14px
-                             color: #858382
+                             .text
+                                 line-height: 20px
+                                 font-size: 14px
+                                 color: #858382
 
+        .comment-wrapper
+            width: 100%
+            position: fixed
+            left: 0
+            top: 370px
+            height: 242px
+            .comment-box
+               .comment-tr
+                   width: 100%
+                   height: 128px
+                   padding: 12px 0 12px 12px
+                   box-sizing: border-box
+                   display: flex
+                   justify-content: space-between
+                   .author-photo
+                       width: 40px
+                       height: 40px
+                       border-radius :50%
+                       img
+                           width: 40px
+                           height: 40px
+                           border-radius :50%
+                   .tr-column
+                       width: 87%
+                       height: 100%
+                       border-bottom:1px solid #E3E9F3;
+                       .author-column
+                           width: 100%
+                           height: 40px
+                           display: flex
+                           justify-content: space-between
+                           align-items: center
+                           .author-info
+                               width: 50%
+                               height: 100%
+                               .author-nickname
+                                   display: block
+                                   padding: 0 0 12px 12px
+                                   width: 100%
+                                   font-size: 14px
+                                   color: #00398a
+                               .position-info
+                                   width: 100%
+                                   height: 20px
+                                   padding: 0 12px
+                                   .posi
+                                       float: left
+                                       font-size: 13px
+                                       text-align: left
+                                       color: #858382
+                                   .time
+                                       float: right
+                                       font-size: 13px
+                                       color: #858382
+                                       text-align: right
+                           .author-right
+                               width: 20%
+                               height: 30px
+                               .praise-icon
+                                   font-size: 18px
+                               .comment-num
+                                   font-size: 14px
+
+                       .comment-content
+                           width: 100%
+                           font-size: 12px
+                           padding: 12px
+                           box-sizing: border-box
+                           .text
+                               line-height: 1.6
+                               font-size: 14px
+                               color: #232323
         .bottom
              box-sizing: border-box
              background:#fff

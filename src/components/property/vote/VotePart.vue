@@ -1,17 +1,21 @@
 <template>
-    <div class="vote-part">
-        <ul class="vote-wrapper">
-            <li class="part-box" v-for="list in partList">
-                <div class="img-box">
-                    <img :src="list.partImg" alt="" width="100%" height="160">
-                </div>
-                <div class="list-bottom">
-                    <span class="title"  @click="select(list)">{{list.title}}</span>
-                    <span class="part-time">{{list.time}}</span>
-                    <span class="part-status" :class="{'end':list.isEnd}">{{list.status}}</span>
-                </div>
-            </li>
-        </ul>
+    <div class="vote-part" ref="votePart">
+        <AppScroll ref="scroll" style="height: 100%;overflow: hidden;">
+            <div>
+                <ul class="vote-wrapper">
+                <li class="part-box" v-for="list in partList">
+                    <div class="img-box">
+                        <img :src="list.partImg" alt="" width="100%" height="160">
+                    </div>
+                    <div class="list-bottom">
+                        <span class="title"  @click="select(list)">{{list.title}}</span>
+                        <span class="part-time">{{list.time}}</span>
+                        <span class="part-status" :class="{'end':list.isEnd}">{{list.status}}</span>
+                    </div>
+                </li>
+            </ul>
+            </div>
+        </AppScroll>
         <div class="views">
             <keep-alive>
                 <router-view></router-view>
@@ -22,33 +26,25 @@
 
 <script>
     import AppSplit from "@/components/base/Split"
+    import AppScroll from "@/components/base/Scroll"
+    import {playlistMixin} from 'js/mixin'
     export default {
         name: "VotePart",
+        mixins:[playlistMixin],
         components:{
-            AppSplit
+            AppSplit,
+            AppScroll
         },
         data(){
             return {
-                partList:[
-                    {
-                        id:1,
-                        partImg:require("img/one.png"),
-                        title:"谁的的旅行摄影制霸朋友圈.漳社区投票活动",
-                        time:"2017-07-0-12至2017-06-15",
-                        status:"进行中",
-                        isEnd:false
-                    },{
-                        id:2,
-                        partImg:require("img/two.png"),
-                        title:"谁的的旅行摄影制霸朋友圈.漳社区投票活动",
-                        time:"2017-07-0-12至2017-06-15",
-                        status:"已结束",
-                        isEnd:true
-                    }
-                ]
             }
         },
         methods:{
+            onHandlePlaylist(playlist){
+                const bottom=playlist.length>0?'60px':'';
+                this.$refs.votePart.style.bottom=bottom;
+                this.$refs.scroll.refresh();
+            },
             select(list){
                 this.$router.push({
                     path:`/property/vote/votePart/${list.id}`
@@ -60,6 +56,11 @@
 
 <style rel="stylesheet/stylus" lang="stylus" scoped>
     .vote-part
+        position: fixed
+        z-index: 6000
+        left: 0
+        top:143px
+        bottom: 0
         .vote-wrapper
            .part-box
                width: 100%

@@ -2,19 +2,29 @@
     <div class="share">
         <div  v-for="list in activityList">
             <Section :list="list"></Section>
+            <div class="report">
+                <div class="mi" @click="report">
+                    <span class="report-icon icon-jubao iconfont"></span>
+                    <span class="report-text">举报</span>
+                </div>
+            </div>
             <AppSplit></AppSplit>
         </div>
+        <AppMask ref="maskWrapper">
+        </AppMask>
     </div>
 </template>
 
 <script>
     import AppSplit from "@/components/base/Split"
     import Section from "@/components/base/Section"
+    import AppMask from "@/components/base/App-mask"
     export default {
         name: "Teaching",
         components:{
             AppSplit,
-            Section
+            Section,
+            AppMask
         },
         data(){
             return {
@@ -64,10 +74,48 @@
                     status:"已结束"
                 }]
             }
+        },
+        methods:{
+            report(){
+                this.$refs.maskWrapper.show();
+            },
+
         }
     }
 </script>
 
-<style scoped>
+<style rel="stylesheet/stylus" lang="stylus" scoped>
+   .share
+      .report
+          width: 100%
+          height: 20px
+          background: #E0E0E2
+          text-align: center
+          position: relative
+          .mi
+              width: 14%
+              position: absolute
+              left: 50%
+              top: 0
+              transform: translate(-50%,0)
+              .report-icon
+                  width:24px
+                  font-size: 18px
+              .report-text
+                  float: right
+                  font-size: 14px
+                  display: block
+                  line-height: 20px
+      .cancel
+          position: fixed
+          bottom: 0
+          left: 0
+          width: 100%
+          height: 40px
+          background: #fff
+          border-bottom:1px solid #E9E9EB
+          text-align: center
+          line-height: 40px
+          font-size: 14px
 
 </style>

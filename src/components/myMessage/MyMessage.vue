@@ -42,7 +42,7 @@
             </div>
             <div class="page-wrapper"  style="padding-bottom: 100px;">
                 <div class="column-box">
-                    <div class="column-tr" v-for="tr in pageList1">
+                    <div class="column-tr" v-for="tr in pageList1" @click="selectPath(tr)">
                         <div class="tr-left">
                             <span class="tr-icon">
                                 <img :src="tr.trIcon" alt="" width="21">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="column-box">
-                    <div class="column-tr" v-for="tr in pageList2">
+                    <div class="column-tr" v-for="tr in pageList2" @click="selectPath(tr)">
                         <div class="tr-left">
                             <span class="tr-icon">
                                 <img :src="tr.trIcon" alt="" width="21">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="column-box">
-                    <div class="column-tr" v-for="tr in pageList3">
+                    <div class="column-tr" v-for="tr in pageList3" @click="selectPath(tr)">
                         <div class="tr-left">
                             <span class="tr-icon">
                                 <img :src="tr.trIcon" alt="" width="21">
@@ -77,6 +77,9 @@
             </div>
         </div>
         <AppFooter></AppFooter>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 
@@ -121,34 +124,49 @@
                 ],
                 pageList1:[
                     {
-                        trIcon:require("../../assets/img/wallet.png"),
-                        myType:"我的钱包"
+                        trIcon:require("img/wallet.png"),
+                        myType:"我的钱包",
+                        toPath:"wallet"
                     },{
-                        trIcon:require("../../assets/img/my_pay.png"),
-                        myType:"我的缴费"
+                        trIcon:require("img/my_pay.png"),
+                        myType:"我的缴费",
+                        toPath:"payMoney"
                     },{
-                        trIcon:require("../../assets/img/goods.png"),
-                        myType:"我的物品"
+                        trIcon:require("img/goods.png"),
+                        myType:"我的物品",
+                        toPath:"goods"
                     },{
-                        trIcon:require("../../assets/img/Interaction.png"),
-                        myType:"我的互动"
+                        trIcon:require("img/Interaction.png"),
+                        myType:"我的互动",
+                        toPath:"interaction"
                     }],
                 pageList2:[
                     {
-                        trIcon:require("../../assets/img/village.png"),
-                        myType:"我的小区"
+                        trIcon:require("img/village.png"),
+                        myType:"我的小区",
+                        toPath:"village"
                     },{
-                        trIcon:require("../../assets/img/number.png"),
-                        myType:"我的成员"
+                        trIcon:require("img/number.png"),
+                        myType:"我的成员",
+                        toPath:"number"
                     },{
-                        trIcon:require("../../assets/img/visitor.png"),
-                        myType:"我的访客"
+                        trIcon:require("img/visitor.png"),
+                        myType:"我的访客",
+                        toPath:"myVisitor"
                     }],
                 pageList3:[
                     {
-                        trIcon:require("../../assets/img/set_up.png"),
-                        myType:"我的设置"
+                        trIcon:require("img/set_up.png"),
+                        myType:"我的设置",
+                        toPath:"setUp"
                     }],
+            }
+        },
+        methods:{
+            selectPath(tr){
+                this.$router.push({
+                    path:`/myMessage/${tr.toPath}`
+                })
             }
         }
     }
@@ -274,7 +292,6 @@
                           font-size: 14px
            .page-wrapper
                width: 100%
-               height: 400px
                padding-top: 50px
                background: #F3F4F8
                .column-box

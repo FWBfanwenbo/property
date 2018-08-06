@@ -55,9 +55,18 @@
                 </span><span class="tyexty">全选</span>
                 </div>
                 <div class="tatol">合计: <span class="sum">{{sum}}</span></div>
-                <div class="goto-pay">去支付</div>
+                <div class="goto-pay" @click="toPay">去支付</div>
             </footer>
-            <router-view></router-view>
+            <div class="pay-box" v-show="isPayShow">
+                <span class="pay-top">您需要支付人民币{{sum}}元</span>
+                <div class="pay-bottom">
+                    <span class="make-sure" @click="makePay">确定</span>
+                    <span class="cancel" @click="hide">取消</span>
+                </div>
+            </div>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </div>
     </transition>
 </template>
@@ -65,11 +74,13 @@
 <script>
     import AppHeader from "@/components/base/Recode-Header"
     import AppSplit from "@/components/base/Split"
+    import AppPaySuccess from "@/components/pay/PaySuccess"
     export default {
         name: "Pay",
         components:{
             AppHeader,
-            AppSplit
+            AppSplit,
+            AppPaySuccess
         },
         data(){
             return {
@@ -79,7 +90,7 @@
                     photoImg:require("img/photo.png"),
                     name:"张山峰",
                     typeImg:require("img/type.png"),
-                    posiImg:require("../../assets/img/posi.png"),
+                    posiImg:require("img/posi.png"),
                     posiText:"富阳富春一号院-鹭影苑-1幢-301室"
                 },
                 recodes:[{
@@ -95,8 +106,8 @@
                     expect:"2017年6月份代缴物业费",
                     check:false
                 }],
-                status:false,
                 pay:[],
+                isPayShow:false
             }
         },
         computed:{
@@ -109,6 +120,12 @@
                     }
                 })
                 return sums.toFixed(2)
+            },
+            status(){
+               var sta=this.recodes.every((item)=>{
+                    return item.check;
+                })
+                return sta;
             }
         },
         methods:{
@@ -117,15 +134,31 @@
             },
             selectItem(id){
                 this.$router.push({
-                    path:`/home/pay/${id}`
+                    path:`/home/pay/${id}`,params:id
                 })
             },
             allSelect(){
                 var that=this;
                 this.recodes.forEach(function (item) {
-                    item.check=true;
+                    item.check=!item.check;
                 })
-                this.status=true;
+            },
+            toPay(){
+                if(!sessionStorage.loginInfo){
+                     this.$router.push({
+                         path:"/login"
+                     })
+                }
+                this.isPayShow=true
+            },
+            hide(){
+                this.isPayShow=false
+            },
+            makePay(){
+                this.hide()
+                this.$router.push({
+                    path:'/paySuccess'
+                })
             }
         }
     }
@@ -303,4 +336,50 @@
                 text-align: center
                 line-height: 30px;
                 border-radius:3px;
+
+        .pay-box
+            width: 250px
+            height: 150px
+            z-index: 4000
+            background: #000
+            color: #fff
+            opacity :0.8
+            border-radius :10px;
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%,-50%)
+            padding: 20px
+            box-sizing: border-box
+            &.slide-enter-active,&.slide-leave-active
+                transition: all 0.5s
+                opacity :0
+            &.slide-enter, &.slide-leave-to
+                opacity :1
+            .pay-top
+                display: block
+                width: 100%
+                height: 50px
+                font-size: 14px
+                text-align: center
+                line-height: 50px
+                border-bottom:1px solid #7d7d7d;
+            .pay-bottom
+                margin-top: 20px
+                width: 100%
+                height: 50px
+            .make-sure
+                width: 50%
+                font-size: 14px
+                border-radius :5px
+                text-align: center
+                line-height: 50%
+                float: left
+            .cancel
+                width: 50%
+                font-size: 14px
+                border-radius :5px
+                text-align: center
+                line-height: 50%
+                float: left
 </style>

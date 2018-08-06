@@ -63,7 +63,7 @@
                 color: #1B1B1B
                 font-weight: 800
             .recode
-                width: 22%
+                width: 25%
                 height: 24px
                 font-size: 14px
                 text-align: center

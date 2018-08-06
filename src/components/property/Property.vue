@@ -1,79 +1,85 @@
 <template>
     <div class="property">
-         <div class="header">
-             <img :src="banner" alt="" width="100%" height="215">
-         </div>
-        <AppSplit></AppSplit>
-        <div class="contact">
-            <div class="contact-left">
+        <AppScroll style="height: 650px;overflow: hidden;">
+            <div>
+                <div class="header">
+                    <img :src="banner" alt="" width="100%" height="215">
+                </div>
+                <AppSplit></AppSplit>
+                <div class="contact">
+                    <div class="contact-left">
                 <span class="contact-icon">
                      <img :src="helpoImg" alt="" width="30" height="30">
                 </span>
-                <div class="contact-info">
-                    <h1 class="h1">联系物业</h1>
-                    <span class="help">遇到麻烦事?找找物业吧</span>
+                        <div class="contact-info">
+                            <h1 class="h1">联系物业</h1>
+                            <span class="help">遇到麻烦事?找找物业吧</span>
+                        </div>
+                    </div>
+                    <span class="goto iconfont icon-qianjin"></span>
                 </div>
-            </div>
-            <span class="goto iconfont icon-qianjin"></span>
-        </div>
-        <AppSplit></AppSplit>
-        <div class="img-column">
-            <ul class="img-box">
-                <li class="img-list" v-for="list in imgColumn">
+                <AppSplit></AppSplit>
+                <div class="img-column">
+                    <ul class="img-box">
+                        <li class="img-list" v-for="list in imgColumn">
                     <span class="img">
                         <img :src="list.imgUrl" alt="" width="120" height="120">
                     </span>
-                    <div class="column-bottom">
-                        <span class="name">{{list.name}}</span>
-                        <div class="type">
-                            <div class="tyope-right">
-                                <span class="text">{{list.type}}</span>
-                                <span class="to-icon">
+                            <div class="column-bottom">
+                                <span class="name">{{list.name}}</span>
+                                <div class="type">
+                                    <div class="tyope-right">
+                                        <span class="text">{{list.type}}</span>
+                                        <span class="to-icon">
                                     <img :src="toIcon" alt="" width="10">
                                 </span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-         <div class="page-column">
-             <ul class="box">
-                 <router-link tag="li" to="/property/vote" class="box-list">
-                     <span class="box-text">园区服务</span>
-                     <span class="box-icon">
+                        </li>
+                    </ul>
+                </div>
+                <div class="page-column">
+                    <ul class="box">
+                        <router-link tag="li" to="/property/vote" class="box-list">
+                            <span class="box-text">园区服务</span>
+                            <span class="box-icon">
                          <img :src="img1" alt="" width="88" height="66">
                      </span>
-                 </router-link>
-                 <router-link tag="li" to="/property/vote" class="box-list">
-                     <span class="box-text">物品放行</span>
-                     <span class="box-icon">
+                        </router-link>
+                        <router-link tag="li" to="/property/vote" class="box-list">
+                            <span class="box-text">物品放行</span>
+                            <span class="box-icon">
                          <img :src="img2" alt="" width="88" height="66">
                      </span>
-                 </router-link>
-                 <router-link tag="li" to="/property/vote" class="box-list">
-                     <span class="box-text">大众选票</span>
-                     <span class="box-icon">
+                        </router-link>
+                        <router-link tag="li" to="/property/vote" class="box-list">
+                            <span class="box-text">大众选票</span>
+                            <span class="box-icon">
                          <img :src="img2" alt="" width="88" height="66">
                      </span>
-                 </router-link>
-             </ul>
-         </div>
+                        </router-link>
+                    </ul>
+                </div>
+            </div>
+        </AppScroll>
+        <AppFooter></AppFooter>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
-        <AppFooter></AppFooter>
     </div>
 </template>
 
 <script>
     import AppFooter from "@/components/footer/Footer"
     import AppSplit from "@/components/base/Split"
+    import AppScroll from "@/components/base/Scroll"
     export default {
         name: "Property",
         components:{
             AppSplit,
-            AppFooter
+            AppFooter,
+            AppScroll
         },
         data(){
             return {

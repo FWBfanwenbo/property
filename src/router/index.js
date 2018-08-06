@@ -30,18 +30,59 @@ import VoteProgress from "@/components/property/vote/VoteProgress"
 import VoteEnd from "@/components/property/vote/VoteEnd"
 import VotePart from "@/components/property/vote/VotePart"
 import VoteDetail from "@/components/property/vote/VoteDetail"
+import Wallet from "@/components/myMessage/my/Wallet"
+import PayMoney from "@/components/myMessage/my/PayMoney"
+import Goods from "@/components/myMessage/my/Goods"
+import Interaction from "@/components/myMessage/my/Interaction"
+import Village from "@/components/myMessage/my/Village"
+import Number from "@/components/myMessage/my/Number"
+import MyVisitor from "@/components/myMessage/my/MyVisitor"
+import SetUp from "@/components/myMessage/my/SetUp"
+import MyData from "@/components/myMessage/my/set-up/MyData"
+import MyInfo from "@/components/home/MyInfo"
+import Praiseme from "@/components/home/info/Praiseme";
+import Commentme from "@/components/home/info/Commentme";
+import Notice from "@/components/home/info/Notice";
+import PaySuccess from "@/components/pay/PaySuccess"
+import Login from "@/components/base/Login"
 
 Vue.use(Router)
 
 export default new Router({
   mode:'history',
   routes: [
+      {
+          path:'/',
+          redirect:'/home'
+      },
+      {
+          path:'/login',
+          component:Login
+      },
+      {
+          path:'/paySuccess',
+          component:PaySuccess
+      },
     {
       path: '/home',
       component: Home,
       children:[{
           path:'repair',
           component:Repair
+      },{
+          path:'myInfo',
+          component:MyInfo,
+          redirect:'/home/myInfo/notice',
+          children:[{
+              path:'notice',
+              component:Notice
+          },{
+              path:'commentme',
+              component:Commentme
+          },{
+              path:'praiseme',
+              component:Praiseme
+          }]
       },{
           path:'pay',
           component:Pay,
@@ -146,7 +187,36 @@ export default new Router({
       },
       {
           path:"/myMessage",
-          component: MyMessage
+          component: MyMessage,
+          children:[{
+              path:"wallet",
+              component:Wallet
+          },{
+              path:"payMoney",
+              component:PayMoney
+          },{
+              path:"goods",
+              component:Goods
+          },{
+              path:"interaction",
+              component:Interaction
+          },{
+              path:"village",
+              component:Village
+          },{
+              path:"number",
+              component:Number
+          },{
+              path:"myVisitor",
+              component:MyVisitor
+          },{
+              path:"setUp",
+              component:SetUp,
+              children:[{
+                  path:"myData",
+                  component:MyData,
+              }]
+          }]
       }
   ],
     scrollBehavior (to, from, savedPosition) {

@@ -1,7 +1,7 @@
 <template>
     <transition name="slide">
         <div class="Visitor">
-            <App-Header :appName="nameTitle" :recode="recode"></App-Header>
+            <App-Header :appName="nameTitle"></App-Header>
             <AppSplit></AppSplit>
             <form action="" id="form">
                 <div class="position">
@@ -21,7 +21,7 @@
                         <span class="s-notice">选择类型:</span>
                     </div>
                     <div class="s-right">
-                        <span @click="selectSex(item)" v-for="item in sexTrue" class="r-man" :class="{active:item.mTrue}">{{item.text}}</span>
+                        <span @click="selectOption(item,index)" v-for="(item,index) in sexTrue" class="r-man" :class="{active:item.status}">{{item.text}}</span>
                     </div>
                 </div>
                 <div class="reset">{{noticetext}}</div>
@@ -55,11 +55,13 @@
                     name:"王宁"
                 },
                 sexTrue:[{
-                    mTrue:true,
-                    text:"表扬"
+                    id:0,
+                    text:"表扬",
+                    status:false
                 },{
-                    mTrue:false,
-                    text:"投诉"
+                    id:1,
+                    text:"投诉",
+                    status:false
                 }],
                 dfTime:"2017-06-22",
                 plate:{
@@ -69,9 +71,19 @@
             }
         },
         methods:{
-            selectSex(item){
-                item.mTrue =!item.mTrue
-            }
+            selectOption(option,index){
+                for(let i=0;i<this.sexTrue.length;i++){
+                    (function (i,option) {
+                        if(option[i].id>=0){
+                            if(option[i]["id"]===index){
+                                option[i].status=!option[i].status
+                            }else{
+                                option[i].status=false
+                            }
+                        }
+                    })(i,this.sexTrue)
+                }
+            },
         }
     }
 </script>
