@@ -35,6 +35,7 @@
         z-index: 2000
         width: 100%
         height: 64px
+        background: #fff
         border-bottom:1px solid #eee;
         .info
             width: 100%;

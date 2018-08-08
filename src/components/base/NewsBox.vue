@@ -69,6 +69,7 @@
 <style rel="stylesheet/stylus" lang="stylus" scoped>
     .news-box
       width: 100%
+      margin-bottom: 50px
       .news-wrapper
         .news-list
           height: 110px

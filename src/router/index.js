@@ -45,6 +45,8 @@ import Commentme from "@/components/home/info/Commentme";
 import Notice from "@/components/home/info/Notice";
 import PaySuccess from "@/components/pay/PaySuccess"
 import Login from "@/components/base/Login"
+import Report from "@/components/neighborhood/Report"
+import Index from "@/components/Index"
 
 Vue.use(Router)
 
@@ -53,7 +55,11 @@ export default new Router({
   routes: [
       {
           path:'/',
-          redirect:'/home'
+          redirect:'/index',
+      },
+      {
+          path:'/index',
+          component:Index
       },
       {
           path:'/login',
@@ -182,7 +188,11 @@ export default new Router({
           },
           {
               path:"teaching",
-              component: Teaching
+              component: Teaching,
+              children:[{
+                  path:"report",
+                  component: Report
+              }]
           }]
       },
       {

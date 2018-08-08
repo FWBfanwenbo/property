@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <App-Header></App-Header>
-    <AppScroll style="height: 620px;overflow: hidden;">
+    <div>
       <div>
         <div>
           <div v-if="recommends.length" class="slider-wrapper">
@@ -39,7 +39,7 @@
         <AppMiddle></AppMiddle>
         <AppNewsBox></AppNewsBox>
       </div>
-    </AppScroll>
+    </div>
     <AppFooter></AppFooter>
     <router-view></router-view>
   </div>
@@ -64,44 +64,45 @@ export default {
   },
   data () {
     return {
-        recommends:[{
-            linkUrl:"https://hd.guahao.com/u/23843?H-3.1.0",
-            picUrl:"https://kano.guahao.cn/LeD43684162?resize=750x336"
-        },{
-            linkUrl:"https://wy.guahao.com/patienteducation/detail/3d38441b-e4cc-4268-bb33-244a39d0a4ae?H-3.1.0",
-            picUrl:"https://kano.guahao.cn/r5h44099261?resize=750x336"
-        },{
-            linkUrl:"https://wy.guahao.com/news/10778/?cs=zt118h5sy&H-3.1.0",
-            picUrl:"https://kano.guahao.cn/kLv43896858?resize=750x336"
-        },{
-            linkUrl:"https://hd.guahao.com/u/23950?H-3.1.0",
-            picUrl:"https://kano.guahao.cn/WmH43510636?resize=750x336"
-        },{
-            linkUrl:"https://hd.guahao.com/n/24004?chb=0174020020&H-3.1.0",
-            picUrl:"https://kano.guahao.cn/Ms943961687?resize=750x336"
+        recommends:[
+            {
+              linkUrl:"https://hd.guahao.com/u/23843?H-3.1.0",
+              picUrl:"https://kano.guahao.cn/LeD43684162?resize=750x336"
+            },{
+              linkUrl:"https://wy.guahao.com/patienteducation/detail/3d38441b-e4cc-4268-bb33-244a39d0a4ae?H-3.1.0",
+              picUrl:"https://kano.guahao.cn/r5h44099261?resize=750x336"
+            },{
+              linkUrl:"https://wy.guahao.com/news/10778/?cs=zt118h5sy&H-3.1.0",
+              picUrl:"https://kano.guahao.cn/kLv43896858?resize=750x336"
+            },{
+              linkUrl:"https://hd.guahao.com/u/23950?H-3.1.0",
+              picUrl:"https://kano.guahao.cn/WmH43510636?resize=750x336"
+            },{
+              linkUrl:"https://hd.guahao.com/n/24004?chb=0174020020&H-3.1.0",
+              picUrl:"https://kano.guahao.cn/Ms943961687?resize=750x336"
+            }],
+        navList:[
+            {
+              imgUrl:require("img/repair.png"),
+              text:"报事报修",
+              toKey:"repair"
+            },{
+              imgUrl:require("img/pay.png"),
+              text:"物业缴费",
+              toKey:"pay"
+            },{
+              imgUrl:require("img/trading-Area.png"),
+              text:"园区商圈",
+              toKey:"tradingarea"
+            },{
+                imgUrl:require("img/visitor.png"),
+                text:"访客通行",
+                toKey:"visitor"
+            },{
+              imgUrl:require("img/visitor.png"),
+              text:"访客通行",
+              toKey:"visitor"
         }],
-        navList:[{
-            imgUrl:require("img/repair.png"),
-            text:"报事报修",
-            toKey:"repair"
-        },{
-            imgUrl:require("img/pay.png"),
-            text:"物业缴费",
-            toKey:"pay"
-        },{
-            imgUrl:require("img/trading-Area.png"),
-            text:"园区商圈",
-            toKey:"tradingarea"
-        },{
-            imgUrl:require("img/visitor.png"),
-            text:"访客通行",
-            toKey:"visitor"
-        },
-        {
-            imgUrl:require("img/visitor.png"),
-            text:"访客通行",
-            toKey:"visitor"
-         }],
         hotImg:require("img/hot.png")
     }
   },

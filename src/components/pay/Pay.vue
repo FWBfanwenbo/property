@@ -64,9 +64,11 @@
                     <span class="cancel" @click="hide">取消</span>
                 </div>
             </div>
-            <keep-alive>
-                <router-view></router-view>
-            </keep-alive>
+            <div style="background: #fcf5fc">
+                <keep-alive>
+                    <router-view></router-view>
+                </keep-alive>
+            </div>
         </div>
     </transition>
 </template>
@@ -173,13 +175,14 @@
         width: 100%
         height: 100%
         z-index:1000
-        background: #fff
+        background: #fcf5fc
         &.slide-enter-active,&.slide-leave-active
             transition: all 0.5s
         &.slide-enter, &.slide-leave-to
             transform: translate3d(100%, 0, 0)
         .list
             margin-top: 64px
+            background: #fff
             width: 100%
             height: 80px
             padding: 6px 12px
@@ -190,6 +193,7 @@
                 width: 50px
                 height: 50px
             .person
+               background: #fff
                width: 84%
                .info
                   width: 23%
@@ -216,9 +220,11 @@
 
 
         .recode-list
+           background: #fff
            width: 100%
            height: 80px
            .recodes
+              background: #fff
               .lists
                  width: 100%
                  height: 80px

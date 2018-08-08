@@ -96,7 +96,7 @@
         width: 100%
         height: 100%
         z-index:4000
-        background: #fff
+        background: #f3f4f8
         &.slide-enter-active,&.slide-leave-active
             transition: all 0.5s
         &.slide-enter, &.slide-leave-to
@@ -106,6 +106,7 @@
             left: 0
             top: 0
             z-index: 2000
+            background: #fff
             width: 100%
             height: 64px
             .info

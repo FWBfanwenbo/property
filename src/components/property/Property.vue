@@ -112,6 +112,7 @@
       .header
           width: 100%
           height: 216px
+          background: #f5f5f5
       .contact
           width: 100%
           height: 90px

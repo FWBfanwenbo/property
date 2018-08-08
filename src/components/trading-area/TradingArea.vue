@@ -60,7 +60,7 @@
         width: 100%
         height: 100%
         z-index:1000
-        background: #fff
+        background: #fcf5fc
         &.slide-enter-active,&.slide-leave-active
             transition: all 0.5s
         &.slide-enter, &.slide-leave-to
@@ -70,6 +70,7 @@
             left: 0
             top: 0
             z-index: 2000
+            background: #fff
             width: 100%
             height: 64px
             border-bottom:1px solid #e6e6e6
@@ -122,6 +123,7 @@
 
         .area-nav
            margin-top: 64px
+           background: #fff
            .nav-box
                width: 100%
                height: 45px

@@ -155,7 +155,7 @@
       width: 100%
       height: 100%
       z-index:5000
-      background: #fff
+      background: #fcf5fc
       &.slide-enter-active,&.slide-leave-active
         transition: all 0.5s
       &.slide-enter, &.slide-leave-to
@@ -167,6 +167,7 @@
         z-index: 2000
         width: 100%
         height: 64px
+        background: #fff
         .info
             width: 100%;
             height: 24px
@@ -198,6 +199,7 @@
           width: 100%
           height: 160px
           position: relative
+          background: #fff
           border-bottom:1px solid #E9E8E9;
         .explain
           width: 60%
@@ -238,6 +240,7 @@
                 text-align: center
                 line-height: 20px
         .pay-info
+            background: #fff
            .pay-type
                .list
                    width: 100%
@@ -268,6 +271,7 @@
 
         .pay-money
             width: 100%
+            background: #fff
             .modes
                 width: 100%
                 box-sizing: border-box

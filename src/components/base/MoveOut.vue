@@ -2,10 +2,13 @@
     <transition name="move-out">
         <div class="move-out" v-show="isShow">
             <ul class="report-box">
-                <li class="list" v-for="(list,index) in reportList" @click="selectItem(list,index)">
+                <li class="list" v-for="(list,index) in reportList" @click="selectItem(list,index)" :class="{'active':nowIndex===list.id}">
                     <span class="text">{{list.name}}</span>
                 </li>
             </ul>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </div>
     </transition>
 </template>
@@ -31,7 +34,8 @@
                         name:"评论过的人",
                         path:"commentMan"
                     }
-                ]
+                ],
+                nowIndex:0
             }
         },
         methods:{
@@ -42,7 +46,12 @@
                 this.isShow=false
             },
             selectItem(list,index){
-                alert(index)
+                this.nowIndex=index
+                setTimeout(()=>{
+                   this.$router.push({
+                       path:`/neighborhood/teaching/${list.path}`
+                   })
+                },100)
             }
         }
     }
@@ -70,6 +79,8 @@
               text-align: center
               line-height: 40px
               font-size: 14px
+          .active
+              color: red
           .cancel
               margin-top: 5px
 </style>
